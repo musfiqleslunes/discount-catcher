@@ -3,9 +3,16 @@ const express = require('express');
 const fetch = require('node-fetch');
 const fs = require('fs');
 const csv = require('csv-parser');
+const cors = require('cors'); // <-- add this line
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+// --- Enable CORS (add right after express/app initialization) ---
+app.use(cors({
+  origin: 'https://leslunes.de', // Change to your store domain
+  // origin: '*', // (uncomment ONLY for temporary testing, never in production with secrets)
+}));
 
 // --- Load all codes from CSV into memory at startup ---
 const manualDiscountMap = {};
